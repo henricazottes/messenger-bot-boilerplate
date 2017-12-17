@@ -1,26 +1,20 @@
 {
-  "name": "Small Sharp Tool",
-  "description": "This app does one little thing, and does it well.",
+  "name": "Messenger bot boilerplate",
+  "description": "Very basic bot to start from.",
   "keywords": [
-    "productivity",
-    "HTML5",
-    "scalpel"
+    "messenger",
+    "bot"
   ],
-  "website": "https://small-sharp-tool.com/",
-  "repository": "https://github.com/jane-doe/small-sharp-tool",
-  "logo": "https://small-sharp-tool.com/logo.svg",
+  "repository": "https://github.com/henricazottes/messenger-bot-boilerplate.git",
   "success_url": "/welcome",
-  "scripts": {
-    "postdeploy": "bundle exec rake bootstrap"
-  },
   "env": {
-    "SECRET_TOKEN": {
-      "description": "A secret key for verifying the integrity of signed cookies.",
+    "VERIFY_TOKEN": {
+      "description": "A secret for validating webhooks.",
       "generator": "secret"
     },
-    "WEB_CONCURRENCY": {
-      "description": "The number of processes to run.",
-      "value": "5"
+    "PAGE_ACCESS_TOKEN": {
+      "description": "The token generated in your messenger app settings.",
+      "value": "Replace_This_Token_With_Yours"
     }
   },
   "formation": {
@@ -28,32 +22,5 @@
       "quantity": 2,
       "size": "Performance-M"
     }
-  },
-  "image": "heroku/ruby",
-  "addons": [
-    "openredis",
-    {
-      "plan": "mongolab:shared-single-small",
-      "as": "MONGO"
-    },
-    {
-      "plan": "heroku-postgresql",
-      "options": {
-        "version": "9.5"
-      }
-    }
-  ],
-  "buildpacks": [
-    {
-      "url": "https://github.com/stomita/heroku-buildpack-phantomjs"
-    }
-  ],
-  "environments": {
-    "test": {
-      "scripts": {
-        "test": "bundle exec rake test"
-      }
-    }
   }
 }
-

@@ -1,7 +1,11 @@
 'use strict';
 require('dotenv');
-const { VERIFY_TOKEN, PAGE_ACCESS_TOKEN, WIT_TOKEN } = process.env;
+const { VERIFY_TOKEN, PAGE_ACCESS_TOKEN } = process.env;
+
+const messages = require('./messages');
 const request = require('request');
+
+const NLP_TRESHOLD = 0.8;
 
 async function callSendAPI(sender_psid, response) {
   // Construct the message body
@@ -27,25 +31,49 @@ async function callSendAPI(sender_psid, response) {
   });
 }
 
+function firstEntity(nlp, name) {
+  return nlp && nlp.entities && nlp.entities[name] && nlp.entities[name][0];
+}
+
 module.exports = {
   handleMessage: async function (sender_psid, received_message) {
     let response;
+    let greeting = firstEntity(message.nlp, 'greeting');
 
-    if (received_message.text) {
+    if (greeting && greeting.confidence > NLP_TRESHOLD) {
       response = {
-        "text": `You sent the message: "${received_message.text}".`
+        'text': 'Hi there! :) Type "help" when you need it.'
+      };
+    } else if (received_message.text == "help") {
+      response = {
+        'text': `You can use following messages to trigger actions:
+        - help
+        - button
+        - menu
+        - default
+        - image
+        - generic`
+      };
+    } else {
+      if (messages[received_message.text]) {
+        response = messages[received_message.text]
+      } else {
+        response = {
+          "text": `You sent: "${received_message.text}".`
+        };
       }
     }
     await callSendAPI(sender_psid, response);
   },
+
   handlePostback: async function (sender_psid, received_postback) {
     let response;
     let payload = received_postback.payload;
 
-    if (payload === 'You are beautiful') {
-      response = { "text": "Thanks!" }
-    } else if (payload === 'Not my type') {
-      response = { "text": "F**k off" }
+    if (payload === 'pretty') {
+      response = { "text": "Thanks!" };
+    } else if (payload === 'ugly') {
+      response = { "text": "F**k off" };
     }
     await callSendAPI(sender_psid, response);
   }
