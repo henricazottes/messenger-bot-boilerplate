@@ -42,9 +42,9 @@ module.exports = {
     const sender_psid = event.sender.id;
     const received_message = event.message;
     let response;
-    let greeting = firstEntity(received_message.nlp, 'greeting');
+    let greetings = firstEntity(received_message.nlp, 'greetings');
 
-    if (greeting && greeting.confidence > NLP_TRESHOLD) {
+    if (greetings && greetings.confidence > NLP_TRESHOLD) {
       response = {
         'text': 'Hi there! :) Type "help" when you need it.'
       };
