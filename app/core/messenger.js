@@ -36,7 +36,9 @@ function firstEntity(nlp, name) {
 }
 
 module.exports = {
-  handleMessage: async function (sender_psid, received_message) {
+  handleMessage: async function (event) {
+    const sender_psid = event.sender.id;
+    const received_message = event.message;
     let response;
     let greeting = firstEntity(received_message.nlp, 'greeting');
 
@@ -66,9 +68,10 @@ module.exports = {
     await callSendAPI(sender_psid, response);
   },
 
-  handlePostback: async function (sender_psid, received_postback) {
+  handlePostback: async function (event) {
+    const sender_psid = event.sender.id;
+    const payload = event.postback.payload;
     let response;
-    let payload = received_postback.payload;
 
     if (payload === 'pretty') {
       response = { "text": "Thanks!" };

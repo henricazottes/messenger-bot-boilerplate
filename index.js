@@ -26,6 +26,7 @@ app.post('/webhook', asyncMiddleware(async (req, res) => {
       const timeOfEvent = entry.time;
       // Iterate over each messaging event
       entry.messaging.forEach(function(event) {
+        console.log("Event:", event);
         if (event.message) {
           handleMessage(event);
         } else if (event.postback) {
