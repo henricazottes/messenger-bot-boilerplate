@@ -1,0 +1,5 @@
+# Rename this file to .env !
+# No spaces between = and value !
+VERIFY_TOKEN=""
+PAGE_ACCESS_TOKEN=""
+WIT_TOKEN=""

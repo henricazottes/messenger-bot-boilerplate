@@ -1,5 +1,5 @@
 'use strict';
-
+require('dotenv');
 const { VERIFY_TOKEN, PAGE_ACCESS_TOKEN, WIT_TOKEN } = process.env;
 const request = require('request');
 
