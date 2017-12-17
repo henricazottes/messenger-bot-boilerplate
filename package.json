@@ -1,5 +1,6 @@
 {
   "name": "messengerbot-boilerplate",
+  "repository": "git@github.com:henricazottes/messenger-bot-boilerplate.git",
   "version": "0.0.1",
   "description": "A simple messenger bot boilerplate.",
   "main": "index.js",
@@ -7,5 +8,11 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Henri Cazottes",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.18.2",
+    "express": "^4.16.2",
+    "request": "^2.83.0",
+    "request-promise": "^4.2.2"
+  }
 }

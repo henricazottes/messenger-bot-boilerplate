@@ -4,7 +4,7 @@ const { VERIFY_TOKEN, PAGE_ACCESS_TOKEN, WIT_TOKEN } = process.env;
 const { handleMessage, handlePostback } = require('./app/core/messenger');
 const { asyncMiddleware } = require('./app/middlewares/asyncMiddleware');
 const
-  request = require('request'),
+  request = require('request-promise'),
   express = require('express'),
   body_parser = require('body-parser'),
   app = express().use(body_parser.json()); // creates express http server
