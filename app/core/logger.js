@@ -1,8 +1,8 @@
 'use strict';
 require('dotenv');
-const { createLogger } = require('winston');
+const winston = require('winston');
 
-const logger = createLogger({
+const logger = winston.createLogger({
   level: process.env.LOG_LEVEL,
   format: winston.format.json(),
   transports: [
