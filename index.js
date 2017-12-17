@@ -3,6 +3,7 @@ require('dotenv');
 const { VERIFY_TOKEN, PAGE_ACCESS_TOKEN } = process.env;
 const { handleMessage, handlePostback } = require('./app/core/messenger');
 const { asyncMiddleware } = require('./app/middlewares/asyncMiddleware');
+const logger = require('./app/core/logger');
 
 const
   request = require('request-promise'),
@@ -32,7 +33,7 @@ app.post('/webhook', asyncMiddleware(async (req, res) => {
         } else if (event.postback) {
           handlePostback(event);
         } else {
-          console.log("Webhook received unknown event: ", event);
+          logger.info("Webhook received unknown event: ", event);
         }
       });
     });
