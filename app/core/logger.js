@@ -20,7 +20,6 @@ const colors = {
   silly: 'magenta'
 }
 
-
 const setLogFunction = (levels, colors, LOG_LEVEL) => level => (...args) => {
   if (levels[level] <= (levels[process.env.LOG_LEVEL] || 2)) {
     args.map(arg => {
