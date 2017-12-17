@@ -12,7 +12,7 @@ const
   path = require('path'),
   app = express().use(body_parser.json()); // creates express http server
 
-app.listen(process.env.PORT || 1337, () => console.log(`Server listening on port ${process.env.PORT || 1337}`));
+app.listen(process.env.PORT || 1337, () => logger.info(`Server listening on port ${process.env.PORT || 1337}`));
 
 // Serve static files
 app.use('/', express.static(path.join(__dirname, 'public'),{extensions:['html']}));
@@ -27,7 +27,7 @@ app.post('/webhook', asyncMiddleware(async (req, res) => {
       const timeOfEvent = entry.time;
       // Iterate over each messaging event
       entry.messaging.forEach(function(event) {
-        console.log("Event:", event);
+        logger.debug("Event:", event);
         if (event.message) {
           handleMessage(event);
         } else if (event.postback) {
@@ -46,10 +46,10 @@ app.post('/webhook', asyncMiddleware(async (req, res) => {
 app.get('/webhook', asyncMiddleware(async (req, res) => {
   if (req.query['hub.mode'] === 'subscribe' &&
       req.query['hub.verify_token'] === process.env.VERIFY_TOKEN) {
-    console.log("Webhook validated.");
+    logger.info("Webhook validated.");
     res.status(200).send(req.query['hub.challenge']);
   } else {
-    console.error("Failed validation. Make sure the validation tokens match.");
+    logger.error("Failed validation. Make sure the validation tokens match.");
     res.sendStatus(403);
   }
 }));
