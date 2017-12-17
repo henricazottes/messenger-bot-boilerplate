@@ -5,7 +5,7 @@
     "messenger",
     "bot"
   ],
-  "logo": "https://raw.githubusercontent.com/henricazottes/messenger-bot-boilerplate/master/logo_boilerplate.png",
+  "logo": "https://i62.servimg.com/u/f62/13/84/06/30/logo10.png",
   "repository": "https://github.com/henricazottes/messenger-bot-boilerplate.git",
   "success_url": "/welcome",
   "env": {
