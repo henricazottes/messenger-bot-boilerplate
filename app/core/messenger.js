@@ -2,6 +2,7 @@
 require('dotenv');
 const { VERIFY_TOKEN, PAGE_ACCESS_TOKEN } = process.env;
 
+const logger = require('./logger');
 const messages = require('./messages');
 const request = require('request');
 
