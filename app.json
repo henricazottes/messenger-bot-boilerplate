@@ -5,11 +5,12 @@
     "messenger",
     "bot"
   ],
+  "logo": "https://raw.githubusercontent.com/henricazottes/messenger-bot-boilerplate/master/logo_boilerplate.png",
   "repository": "https://github.com/henricazottes/messenger-bot-boilerplate.git",
   "success_url": "/welcome",
   "env": {
     "VERIFY_TOKEN": {
-      "description": "A secret for validating webhooks. When set, copy it to your webhooks settings.",
+      "description": "A secret for validating webhooks. After deploying, copy it to your webhooks settings.",
       "value": "Replace_This_Token_With_Yours"
     },
     "PAGE_ACCESS_TOKEN": {
@@ -19,8 +20,8 @@
   },
   "formation": {
     "web": {
-      "quantity": 2,
-      "size": "Performance-M"
+      "quantity": 1,
+      "size": "free"
     }
   }
 }
