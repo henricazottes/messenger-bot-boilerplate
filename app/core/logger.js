@@ -1,14 +1,37 @@
-const winston = require('winston');
+const chalk = require('chalk');
+const levels = {
+  error: 0,
+  warn: 1,
+  info: 2,
+  http: 3,
+  verbose: 4,
+  debug: 5,
+  silly: 6
+};
 
-const combined = new winston.transports.File({ filename: 'combined.log' });
-const error = new winston.transports.File({ filename: 'error.log', level: 'error' });
-const cons = new winston.transports.Console({format: winston.format.combine(
-  winston.format.colorize({ all: true }),
-  winston.format.simple()
-)});
+const colors = {
+  error: 'red',
+  warn: 'yellow',
+  info: 'green',
+  http: 'green',
+  verbose: 'cyan',
+  debug: 'blue',
+  silly: 'magenta'
+}
 
-winston.add(error);
-winston.add(combined);
-winston.add(cons);
+const logger = Object.keys(levels).map(level => {
+  return (...args) => {
+    if (levels[level] <= levels[(process.env.LOG_LEVEL || 2)]) {
+      args.map(arg => {
+        if (typeof arg === 'object') {
+          text = JSON.stringify(arg);
+        }
+        console.log(chalk[colors[level]](text));
+      });
+    }
+  }
+});
 
-module.exports = winston;
+console.log("logger info:" , logger.info);
+
+module.exports = logger;
