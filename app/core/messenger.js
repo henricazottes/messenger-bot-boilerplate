@@ -38,7 +38,7 @@ function firstEntity(nlp, name) {
 module.exports = {
   handleMessage: async function (sender_psid, received_message) {
     let response;
-    let greeting = firstEntity(message.nlp, 'greeting');
+    let greeting = firstEntity(received_message.nlp, 'greeting');
 
     if (greeting && greeting.confidence > NLP_TRESHOLD) {
       response = {
