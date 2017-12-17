@@ -11,8 +11,8 @@ Then you'll need to generate an **PAGE_ACCESS_TOKEN** that you will use afterwar
 ## 📥 Install
 
 For both methods:
-- Fill the PAGE_ACCESS_TOKEN with the previously generated one
-- Enter a custom VERIFY_TOKEN and use the same in your messenger app webhooks configuration
+- Fill the **PAGE_ACCESS_TOKEN** with the previously generated one
+- Enter a custom **VERIFY_TOKEN** and use the same in your messenger app webhooks configuration
 
 ### Heroku
 
