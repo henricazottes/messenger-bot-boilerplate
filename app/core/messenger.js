@@ -25,14 +25,15 @@ async function callSendAPI(sender_psid, response) {
     "json": request_body
   }, (err, res, body) => {
     if (!err) {
-      console.log('Message sent!')
+      logger.info('Message sent!')
     } else {
-      console.error("Unable to send message:" + err);
+      logger.error("Unable to send message:" + err);
     }
   });
 }
 
 function firstEntity(nlp, name) {
+  logger.info("Nlp:", nlp);
   return nlp && nlp.entities && nlp.entities[name] && nlp.entities[name][0];
 }
 
