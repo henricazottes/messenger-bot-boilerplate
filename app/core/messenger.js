@@ -2,7 +2,7 @@
 require('dotenv');
 const { VERIFY_TOKEN, PAGE_ACCESS_TOKEN } = process.env;
 
-const logger = require('./logger');
+const logger = require('winston');
 const messages = require('./messages');
 const request = require('request');
 
@@ -25,9 +25,9 @@ async function callSendAPI(sender_psid, response) {
     "json": request_body
   }, (err, res, body) => {
     if (!err) {
-      console.log('Message sent!')
+      logger.info('Message sent!')
     } else {
-      console.error("Unable to send message:" + err);
+      logger.error("Unable to send message:" + err);
     }
   });
 }
