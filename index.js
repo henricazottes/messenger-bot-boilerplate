@@ -8,6 +8,7 @@ const
   request = require('request-promise'),
   express = require('express'),
   body_parser = require('body-parser'),
+  path = require('path'),
   app = express().use(body_parser.json()); // creates express http server
 
 app.listen(process.env.PORT || 1337, () => console.log(`Server listening on port ${process.env.PORT || 1337}`));
