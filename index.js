@@ -14,7 +14,7 @@ const
 app.listen(process.env.PORT || 1337, () => console.log(`Server listening on port ${process.env.PORT || 1337}`));
 
 // Serve static files
-app.use('/', express.static(path.join(__dirname, 'public')));
+app.use('/', express.static(path.join(__dirname, 'public'),{extensions:['html']}));
 
 app.post('/webhook', asyncMiddleware(async (req, res) => {
   const data = req.body;
