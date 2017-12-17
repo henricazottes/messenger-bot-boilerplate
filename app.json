@@ -9,8 +9,8 @@
   "success_url": "/welcome",
   "env": {
     "VERIFY_TOKEN": {
-      "description": "A secret for validating webhooks.",
-      "generator": "secret"
+      "description": "A secret for validating webhooks. When set, copy it to your webhooks settings.",
+      "value": "Replace_This_Token_With_Yours"
     },
     "PAGE_ACCESS_TOKEN": {
       "description": "The token generated in your messenger app settings.",
