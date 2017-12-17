@@ -2,7 +2,7 @@
 require('dotenv');
 const { VERIFY_TOKEN, PAGE_ACCESS_TOKEN } = process.env;
 
-const logger = require('winston');
+const logger = require('./logger');
 const messages = require('./messages');
 const request = require('request');
 
@@ -33,6 +33,7 @@ async function callSendAPI(sender_psid, response) {
 }
 
 function firstEntity(nlp, name) {
+  logger.info("Nlp:", nlp);
   return nlp && nlp.entities && nlp.entities[name] && nlp.entities[name][0];
 }
 

@@ -1,14 +1,43 @@
-const winston = require('winston');
+const chalk = require('chalk');
+const moment = require('moment');
+const levels = {
+  error: 0,
+  warn: 1,
+  info: 2,
+  http: 3,
+  verbose: 4,
+  debug: 5,
+  silly: 6
+};
 
-const combined = new winston.transports.File({ filename: 'combined.log' });
-const error = new winston.transports.File({ filename: 'error.log', level: 'error' });
-const cons = new winston.transports.Console({format: winston.format.combine(
-  winston.format.colorize({ all: true }),
-  winston.format.simple()
-)});
+const colors = {
+  error: 'red',
+  warn: 'yellow',
+  info: 'green',
+  http: 'green',
+  verbose: 'cyan',
+  debug: 'blue',
+  silly: 'magenta'
+}
 
-winston.add(error);
-winston.add(combined);
-winston.add(cons);
 
-module.exports = winston;
+const setLogFunction = (levels, colors, LOG_LEVEL) => level => (...args) => {
+  if (levels[level] <= (levels[process.env.LOG_LEVEL] || 2)) {
+    args.map(arg => {
+      if (typeof arg === 'object') {
+        arg = JSON.stringify(arg, null, '  ');
+      } 
+      const time = `[${moment().format('DD/MM/YY HH:mm:ss')}]`;
+      const info = `[${level}]: ${arg}`;
+      console.log(`${time} ${chalk[colors[level]](info)}`);
+    });
+  }
+};
+
+const getLogFunction = setLogFunction(levels, colors, process.env.LOG_LEVEL);
+const logger = {};
+Object.keys(levels).map(level => {
+  logger[level] = getLogFunction(level);
+});
+
+module.exports = logger;
